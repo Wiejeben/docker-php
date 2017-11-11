@@ -8,6 +8,7 @@ Included PHP dependencies:
 - Intl
 - Imagick
 - Composer
+- Iconv
 - Redis (Disabled by default: `REDIS_ENABLE`)
 - Xdebug (Disabled by default: `XDEBUG_ENABLE`)
 
