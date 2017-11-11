@@ -28,15 +28,15 @@ RUN set -x \
     && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \
     && apk del .phpize-deps
 
+# Composer
+RUN curl --silent --show-error https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+
 # Redis
 RUN set -x \
     && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS \
     && pecl install redis \
     && rm -rf /tmp/pear \
     && apk del .phpize-deps
-
-# Composer
-RUN curl --silent --show-error https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
 # Xdebug
 RUN set -x \

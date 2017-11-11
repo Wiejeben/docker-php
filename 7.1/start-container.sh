@@ -2,7 +2,6 @@
 
 if [ "$XDEBUG_ENABLE" == true ] || [ "$XDEBUG_ENABLE" == 1 ]; then
     # Enable Xdebug
-    echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     docker-php-ext-enable xdebug
 else
     # Disable Xdebug
