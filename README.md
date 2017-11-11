@@ -1,2 +1,2 @@
 # Docker PHP images
-Personal Docker configuration.
+Personal Docker images.
