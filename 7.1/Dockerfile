@@ -1,13 +1,5 @@
 FROM php:7.1-fpm-alpine
 
-# Copy scripts and configuration
-COPY start-container.sh /usr/local/bin/start-container
-COPY php.ini /usr/local/etc/php/conf.d/php.ini
-
-# Setup working directory
-RUN mkdir /srv/app && chown -R www-data:www-data /srv/app
-WORKDIR /srv/app
-
 # PDO
 RUN docker-php-ext-install pdo pdo_mysql
 
@@ -48,4 +40,12 @@ RUN set -x \
 RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
-CMD ["start-container"]
+# Setup working directory
+RUN mkdir /srv/app && chown -R www-data:www-data /srv/app
+WORKDIR /srv/app
+
+# Copy scripts and configuration
+COPY php.ini /usr/local/etc/php/conf.d/php.ini
+COPY run.sh /usr/local/bin/docker-script
+
+CMD ["docker-script"]
