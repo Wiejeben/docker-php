@@ -2,7 +2,9 @@
 
 if [ "$XDEBUG_ENABLE" == true ] || [ "$XDEBUG_ENABLE" == 1 ]; then
     # Enable Xdebug
-    docker-php-ext-enable xdebug
+    if [ ! -e /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini ]; then
+        docker-php-ext-enable xdebug
+    fi
 else
     # Disable Xdebug
     if [ -e /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini ]; then
@@ -12,7 +14,9 @@ fi
 
 if [ "$REDIS_ENABLE" == true ] || [ "$REDIS_ENABLE" == 1 ]; then
     # Enable Redis
-    docker-php-ext-enable redis
+    if [ ! -e /usr/local/etc/php/conf.d/docker-php-ext-redis.ini ]; then
+        docker-php-ext-enable redis
+    fi
 else
     # Disable Redis
     if [ -e /usr/local/etc/php/conf.d/docker-php-ext-redis.ini ]; then
