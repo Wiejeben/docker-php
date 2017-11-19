@@ -45,7 +45,7 @@ RUN mkdir /srv/app && chown -R www-data:www-data /srv/app
 WORKDIR /srv/app
 
 # Copy scripts and configuration
-COPY php.ini /usr/local/etc/php/conf.d/php.ini
+COPY php.ini /usr/local/etc/php/conf.d/php-default.ini
 COPY run.sh /usr/local/bin/docker-script
 
 CMD ["docker-script"]
