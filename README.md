@@ -3,7 +3,7 @@ Added only a few PHP packages to focus on performance. Disabled PHP dependencies
 
 Included PHP dependencies:
 - PDO
-- Mcrypt
+- Mcrypt (depricated in PHP 7.2)
 - ZIP
 - Intl
 - Imagick
