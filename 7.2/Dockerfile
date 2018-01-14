@@ -18,6 +18,7 @@ RUN set -x \
     && apk del .phpize-deps
 
 # Composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl --silent --show-error https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
 # Redis

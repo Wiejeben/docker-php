@@ -26,7 +26,6 @@ fi
 
 if [ "$COMPOSER_ENABLE" == true ] || [ "$COMPOSER_ENABLE" == 1 ]; then
     if [ -f composer.json ]; then
-        export COMPOSER_ALLOW_SUPERUSER=1
         composer install --no-interaction
     else
         echo 'composer.json could not be found in the root of this directory!'
