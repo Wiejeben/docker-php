@@ -1,51 +1,50 @@
 FROM php:7.1-fpm-alpine
 
-# PDO
+# EXT_PDO_MYSQL
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Mcrypt
+# EXT_MCRYPT
 RUN apk add --no-cache libmcrypt-dev && docker-php-ext-install mcrypt
 
-# ZIP
+# EXT_ZIP
 RUN apk add --no-cache zlib-dev && docker-php-ext-install zip
 
-# Intl
+# EXT_INTL
 RUN apk add --no-cache icu-dev && docker-php-ext-configure intl && docker-php-ext-install intl
 
-# Imagick
+# EXT_IMAGICK
 RUN set -x \
     && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS imagemagick-dev libtool \
     && pecl install imagick-stable \
-    && docker-php-ext-enable imagick \
     && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \
     && apk del .phpize-deps
 
-# Composer
+# COMPOSER_ENABLE
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl --silent --show-error https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-# Redis
+# EXT_REDIS
 RUN set -x \
     && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS \
     && pecl install redis \
     && rm -rf /tmp/pear \
     && apk del .phpize-deps
 
-# Xdebug
+# EXT_XDEBUG
 RUN set -x \
     && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS \
     && pecl install xdebug-stable \
     && apk del .phpize-deps
 
-# Iconv
+# EXT_ICONV
 RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+# ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 # Setup working directory
 RUN mkdir /srv/app && chown -R www-data:www-data /srv/app
 WORKDIR /srv/app
 
-# Copy scripts and configuration
+# # Copy scripts and configuration
 COPY php.ini /usr/local/etc/php/conf.d/php-default.ini
 COPY run.sh /usr/local/bin/docker-script
 
