@@ -34,10 +34,6 @@ RUN set -x \
     && pecl install xdebug-2.6.0beta1 \
     && apk del .phpize-deps
 
-# Iconv
-RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
-
 # Setup working directory
 RUN mkdir /srv/app && chown -R www-data:www-data /srv/app
 WORKDIR /srv/app

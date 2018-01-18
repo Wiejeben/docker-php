@@ -1,7 +1,9 @@
 # Docker PHP-FPM
-Added a few basic packages which need to be enabled individually via environment variables. To learn more about how to use environment variables, see [Docker Compose documentation](https://docs.docker.com/compose/environment-variables/) or the [Docker documentation](https://docs.docker.com/engine/reference/run/#env-environment-variables).
+Comes with a few general PHP Extensions which need to be enabled individually via environment variables. To learn more about how to use environment variables, see [Docker Compose documentation](https://docs.docker.com/compose/environment-variables/) or the [Docker documentation](https://docs.docker.com/engine/reference/run/#env-environment-variables).
 
-## PHP extensions (disabled by default):
+Build are available at (https://hub.docker.com/r/wiejeben/php/)[https://hub.docker.com/r/wiejeben/php/]
+
+## PHP Extensions (disabled by default):
 - PDO MySQL: `EXT_PDO_MYSQL`
 - Xdebug: `EXT_XDEBUG`
 - Redis: `EXT_REDIS`
