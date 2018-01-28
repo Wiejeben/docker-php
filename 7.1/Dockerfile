@@ -1,36 +1,43 @@
 FROM php:7.1-fpm-alpine
 
-# EXT_PDO_MYSQL
-RUN docker-php-ext-install pdo pdo_mysql
+# PDO
+ARG EXT_PDO_MYSQL=0
+RUN docker-php-ext-install pdo pdo_mysql && apk add --no-cache mysql-client
 
-# EXT_MCRYPT
+# Mcrypt
+ARG EXT_MCRYPT=0
 RUN apk add --no-cache libmcrypt-dev && docker-php-ext-install mcrypt
 
-# EXT_ZIP
+# ZIP
+ARG EXT_ZIP=0
 RUN apk add --no-cache zlib-dev && docker-php-ext-install zip
 
-# EXT_INTL
+# Intl
+ARG EXT_INTL=0
 RUN apk add --no-cache icu-dev && docker-php-ext-configure intl && docker-php-ext-install intl
 
-# EXT_IMAGICK
+# Imagick
+ARG EXT_IMAGICK=0
 RUN set -x \
     && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS imagemagick-dev libtool \
     && pecl install imagick-stable \
     && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \
     && apk del .phpize-deps
 
-# COMPOSER_ENABLE
+# Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl --silent --show-error https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-# EXT_REDIS
+# Redis
+ARG EXT_REDIS=0
 RUN set -x \
     && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS \
     && pecl install redis \
     && rm -rf /tmp/pear \
     && apk del .phpize-deps
 
-# EXT_XDEBUG
+# Xdebug
+ARG EXT_XDEBUG=0
 RUN set -x \
     && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS \
     && pecl install xdebug-stable \
@@ -42,6 +49,8 @@ WORKDIR /srv/app
 
 # # Copy scripts and configuration
 COPY php.ini /usr/local/etc/php/conf.d/php-default.ini
-COPY run.sh /usr/local/bin/docker-script
+COPY build.sh /usr/local/bin/docker-build
 
-CMD ["docker-script"]
+RUN ["docker-build"]
+
+CMD ["php-fpm"]

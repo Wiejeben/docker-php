@@ -1,15 +1,19 @@
 FROM php:7.2-fpm-alpine
 
 # PDO
-RUN docker-php-ext-install pdo pdo_mysql
+ARG EXT_PDO_MYSQL=0
+RUN docker-php-ext-install pdo pdo_mysql && apk add --no-cache mysql-client
 
 # ZIP
+ARG EXT_ZIP=0
 RUN apk add --no-cache zlib-dev && docker-php-ext-install zip
 
 # Intl
+ARG EXT_INTL=0
 RUN apk add --no-cache icu-dev && docker-php-ext-configure intl && docker-php-ext-install intl
 
 # Imagick
+ARG EXT_IMAGICK=0
 RUN set -x \
     && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS imagemagick-dev libtool \
     && pecl install imagick-stable \
@@ -22,6 +26,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl --silent --show-error https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
 # Redis
+ARG EXT_REDIS=0
 RUN set -x \
     && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS \
     && pecl install redis \
@@ -29,6 +34,7 @@ RUN set -x \
     && apk del .phpize-deps
 
 # Xdebug (beta for 7.2 support)
+ARG EXT_XDEBUG=0
 RUN set -x \
     && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS \
     && pecl install xdebug-2.6.0beta1 \
@@ -40,6 +46,8 @@ WORKDIR /srv/app
 
 # Copy scripts and configuration
 COPY php.ini /usr/local/etc/php/conf.d/php-default.ini
-COPY run.sh /usr/local/bin/docker-script
+COPY build.sh /usr/local/bin/docker-build
 
-CMD ["docker-script"]
+RUN ["docker-build"]
+
+CMD ["php-fpm"]

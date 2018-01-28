@@ -50,19 +50,3 @@ if [[ "$(echo "$EXT_ICONV")" != '' ]]; then
 else
     echo "iconv: Disabled"
 fi
-
-if [[ "$(echo "$COMPOSER_ENABLE")" != '' ]]; then
-    if [ "$COMPOSER_ENABLE" == true ] || [ "$COMPOSER_ENABLE" == 1 ]; then
-        echo "composer: Enabled"
-        if [ -f composer.json ]; then
-            composer install --no-interaction
-        else
-            echo '`composer.json` could not be found in the root of this directory.'
-            pwd
-        fi
-    fi
-else
-    echo "composer: Disabled"
-fi
-
-php-fpm
