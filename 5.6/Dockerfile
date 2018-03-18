@@ -1,8 +1,12 @@
-FROM php:7.2-fpm-alpine
+FROM php:5.6-fpm-alpine
 
 # PDO
 ARG EXT_PDO_MYSQL=0
 RUN docker-php-ext-install pdo pdo_mysql && apk add --no-cache mysql-client
+
+# Mcrypt
+ARG EXT_MCRYPT=0
+RUN apk add --no-cache libmcrypt-dev && docker-php-ext-install mcrypt
 
 # ZIP
 ARG EXT_ZIP=0
@@ -37,7 +41,7 @@ RUN set -x \
 ARG EXT_XDEBUG=0
 RUN set -x \
     && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS \
-    && pecl install xdebug-stable \
+    && pecl install xdebug-2.5.5 \
     && apk del .phpize-deps
 
 # Setup working directory
