@@ -12,6 +12,7 @@ Build are available at https://hub.docker.com/r/wiejeben/php
 - Imagick `EXT_IMAGICK`
 - Mcrypt: `EXT_MCRYPT` (Depricated in 7.2)
 
+Note: PHP 5.4 and 5.5 do not include any PHP extensions, this is simply a reference to cytopia his PHP-FPM packages since PHP officially does not support 5.4 and 5.5 anymore.
 
 ## Suggestions
 Hit me up on Twitter @Wiejeben, create an issue or preferrably create a pull request with suggestions!
