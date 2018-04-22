@@ -40,6 +40,14 @@ RUN set -x \
     && pecl install xdebug-stable \
     && apk del .phpize-deps
 
+# GD
+ARG EXT_GD=0
+RUN apk add --no-cache libpng-dev && docker-php-ext-install gd
+
+# SOAP
+ARG EXT_SOAP=0
+run apk add --no-cache libxml2-dev && docker-php-ext-install soap
+
 # Setup working directory
 RUN mkdir /srv/app && chown -R www-data:www-data /srv/app
 WORKDIR /srv/app

@@ -38,6 +38,8 @@ setExtensionStatus redis "$EXT_REDIS"
 setExtensionStatus zip "$EXT_ZIP"
 setExtensionStatus intl "$EXT_INTL"
 setExtensionStatus imagick "$EXT_IMAGICK"
+setExtensionStatus gd "$EXT_GD"
+setExtensionStatus soap "$EXT_SOAP"
 
 if [[ "$(echo "$EXT_ICONV")" != '' ]]; then
     if [ "$EXT_ICONV" == true ] || [ "$EXT_ICONV" == 1 ]; then
