@@ -1,5 +1,5 @@
 # Use specific version of PHP to avoid PDO installation errors
-FROM php:7.0.28-fpm-alpine
+FROM php:7.0-fpm-alpine
 
 # PDO
 ARG EXT_PDO_MYSQL=0
