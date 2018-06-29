@@ -13,6 +13,7 @@ Build are available at https://hub.docker.com/r/wiejeben/php
 - Mcrypt: `EXT_MCRYPT` (Depricated in 7.2)
 - GD: `EXT_GD`
 - SOAP: `EXT_SOAP`
+- OPcache: `EXT_OPCACHE`
 
 Note: PHP 5.4 and 5.5 do not include any PHP extensions, this is simply a reference to cytopia his PHP-FPM packages since PHP officially does not support 5.4 and 5.5 anymore.
 

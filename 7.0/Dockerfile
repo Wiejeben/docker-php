@@ -53,6 +53,10 @@ RUN apk add --no-cache libpng-dev && docker-php-ext-install gd
 ARG EXT_SOAP=0
 run apk add --no-cache libxml2-dev && docker-php-ext-install soap
 
+# OPcache
+ARG EXT_OPCACHE=0
+run docker-php-ext-install opcache
+
 # Setup working directory
 RUN mkdir /srv/app && chown -R www-data:www-data /srv/app
 WORKDIR /srv/app
