@@ -17,5 +17,8 @@ Build are available at https://hub.docker.com/r/wiejeben/php
 
 Note: PHP 5.4 and 5.5 do not include any PHP extensions, this is simply a reference to cytopia his PHP-FPM packages since PHP officially does not support 5.4 and 5.5 anymore.
 
+## Crontab
+If you want to enable Crontab, build your image with `ARG CRONTAB=1` and copy your crontab file to `/srv/crontab.txt`. This is again only supported for 5.6 and up.
+
 ## Suggestions
 Hit me up on Twitter @Wiejeben, create an issue or preferrably create a pull request with suggestions!

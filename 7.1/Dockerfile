@@ -55,6 +55,9 @@ run apk add --no-cache libxml2-dev && docker-php-ext-install soap
 ARG EXT_OPCACHE=0
 run docker-php-ext-install opcache
 
+# Crontab support
+ARG CRONTAB=0
+
 # Setup working directory
 RUN mkdir /srv/app && chown -R www-data:www-data /srv/app
 WORKDIR /srv/app
@@ -65,4 +68,4 @@ COPY build.sh /usr/local/bin/docker-build
 
 RUN ["docker-build"]
 
-CMD ["php-fpm"]
+CMD ["sh", "-c", "/usr/sbin/crond -L ../crontab.log && php-fpm"]

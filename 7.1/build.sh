@@ -53,3 +53,10 @@ if [[ "$(echo "$EXT_ICONV")" != '' ]]; then
 else
     echo "iconv: Disabled"
 fi
+
+if [ "$CRONTAB" == "1" ]; then
+    crontab /srv/crontab.txt
+    echo "crontab: Loaded"
+else
+    echo "crontab: Not loaded"
+fi
