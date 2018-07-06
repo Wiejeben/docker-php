@@ -53,7 +53,7 @@ else
     echo "iconv: Disabled"
 fi
 
-if [ "$CRONTAB" == "1" ]; then
+if [ $CRONTAB == true ] || [ $CRONTAB == 1 ]; then
     crontab /srv/crontab.txt
     echo "crontab: Loaded"
 else
