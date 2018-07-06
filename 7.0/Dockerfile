@@ -57,6 +57,11 @@ run apk add --no-cache libxml2-dev && docker-php-ext-install soap
 ARG EXT_OPCACHE=0
 run docker-php-ext-install opcache
 
+# Remove warnings
+RUN rm -rf /var/cache/apk/* && \
+    rm -rf /tmp/* && \
+    apk update
+
 # Crontab support
 ARG CRONTAB=0
 
