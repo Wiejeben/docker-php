@@ -42,20 +42,13 @@ setExtensionStatus gd "$EXT_GD"
 setExtensionStatus soap "$EXT_SOAP"
 setExtensionStatus opcache "$EXT_OPCACHE"
 
-if [[ "$(echo "$EXT_ICONV")" != '' ]]; then
-    if [ "$EXT_ICONV" == true ] || [ "$EXT_ICONV" == 1 ]; then
-        echo "iconv: Enabled"
-        export LD_PRELOAD="/usr/lib/preloadable_libiconv.so php"
+if [ "$(echo "$CRONTAB")" != '' ]; then
+    if [ $CRONTAB == true ] || [ $CRONTAB == 1 ]; then
+        crontab /srv/crontab.txt
+        echo "crontab: Enabled"
     else
-        echo "iconv: Disabled"
+        echo "crontab: Disabled"
     fi
 else
-    echo "iconv: Disabled"
-fi
-
-if [ $CRONTAB == true ] || [ $CRONTAB == 1 ]; then
-    crontab /srv/crontab.txt
-    echo "crontab: Loaded"
-else
-    echo "crontab: Not loaded"
+    echo "crontab: Disabled"
 fi

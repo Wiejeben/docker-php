@@ -41,8 +41,6 @@ setExtensionStatus intl "$EXT_INTL"
 setExtensionStatus imagick "$EXT_IMAGICK"
 setExtensionStatus gd "$EXT_GD"
 setExtensionStatus soap "$EXT_SOAP"
-setExtensionStatus gd "$EXT_GD"
-setExtensionStatus soap "$EXT_SOAP"
 setExtensionStatus opcache "$EXT_OPCACHE"
 
 if [[ "$(echo "$EXT_ICONV")" != '' ]]; then

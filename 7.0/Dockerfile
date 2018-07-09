@@ -57,13 +57,17 @@ run apk add --no-cache libxml2-dev && docker-php-ext-install soap
 ARG EXT_OPCACHE=0
 run docker-php-ext-install opcache
 
+# Crontab support
+ARG CRONTAB=0
+
+# iconv
+RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+
 # Remove warnings
 RUN rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
     apk update
-
-# Crontab support
-ARG CRONTAB=0
 
 # Setup working directory
 RUN mkdir /srv/app && chown -R www-data:www-data /srv/app
