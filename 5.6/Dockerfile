@@ -63,6 +63,10 @@ ARG CRONTAB=0
 RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
+# Socket
+ARG EXT_SOCKET=0
+RUN docker-php-ext-install sockets
+
 # Remove warnings
 RUN rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \

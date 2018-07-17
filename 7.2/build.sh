@@ -41,6 +41,7 @@ setExtensionStatus imagick "$EXT_IMAGICK"
 setExtensionStatus gd "$EXT_GD"
 setExtensionStatus soap "$EXT_SOAP"
 setExtensionStatus opcache "$EXT_OPCACHE"
+setExtensionStatus sockets "$EXT_SOCKET"
 
 if [ "$(echo "$CRONTAB")" != '' ]; then
     if [ $CRONTAB == true ] || [ $CRONTAB == 1 ]; then

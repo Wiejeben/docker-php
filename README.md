@@ -14,6 +14,7 @@ Build are available at https://hub.docker.com/r/wiejeben/php
 - GD: `EXT_GD`
 - SOAP: `EXT_SOAP`
 - OPcache: `EXT_OPCACHE`
+- Sockets: `EXT_SOCKET`
 - iconv: Enabled by default
 
 Note: PHP 5.4 and 5.5 do not include any PHP extensions, this is simply a reference to cytopia his PHP-FPM packages since PHP officially does not support 5.4 and 5.5 anymore.

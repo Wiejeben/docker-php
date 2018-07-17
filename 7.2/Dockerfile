@@ -46,7 +46,7 @@ RUN apk add --no-cache libpng-dev && docker-php-ext-install gd
 
 # SOAP
 ARG EXT_SOAP=0
-run apk add --no-cache libxml2-dev && docker-php-ext-install soap
+RUN apk add --no-cache libxml2-dev && docker-php-ext-install soap
 
 # OPcache
 ARG EXT_OPCACHE=0
@@ -58,6 +58,10 @@ ARG CRONTAB=0
 # iconv
 RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+
+# Socket
+ARG EXT_SOCKET=0
+RUN docker-php-ext-install sockets
 
 # Remove warnings
 RUN rm -rf /var/cache/apk/* && \
